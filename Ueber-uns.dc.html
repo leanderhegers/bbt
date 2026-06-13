@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Hanken Grotesk',sans-serif;background:#F5F1EA;color:#15110F;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes spinr{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+</style>
+</helmet>
+<div style="background:#F5F1EA;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
+
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(21,17,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
+    <nav style="max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="Startseite.dc.html" style="display:flex;align-items:center;gap:13px">
+        <img src="assets/logo-white.png" alt="BBT" style="height:42px;width:auto;display:block">
+        <span style="display:flex;flex-direction:column;line-height:1;white-space:nowrap">
+          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px;letter-spacing:.5px">BEACH BANG THEORY</span>
+          <span style="font-family:'Space Mono',monospace;color:#D8232A;font-size:10.5px;letter-spacing:3px;margin-top:3px">PADERBORN E.V.</span>
+        </span>
+      </a>
+      <div style="display:flex;align-items:center;gap:30px">
+        <div style="display:flex;align-items:center;gap:22px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.82)">
+          <a href="Mannschaften.dc.html" style="padding:6px 0">Mannschaften</a>
+          <a href="Turniere.dc.html" style="padding:6px 0">Turniere</a>
+          <a href="Ueber-uns.dc.html" style="padding:6px 0;color:#D8232A">Über uns</a>
+          <a href="Galerie.dc.html" style="padding:6px 0">Galerie</a>
+        </div>
+        <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:12px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(216,35,42,.4)">MITGLIED WERDEN →</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section style="background:#15110F;color:#fff;padding:clamp(60px,7vw,100px) 28px clamp(60px,7vw,90px);position:relative;overflow:hidden">
+    <div style="position:absolute;top:50%;right:-6%;transform:translateY(-50%);width:min(560px,70vw);height:min(560px,70vw);opacity:.5;pointer-events:none">
+      <svg viewBox="0 0 600 600" style="width:100%;height:100%;animation:spin 70s linear infinite">
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="2" transform="rotate(20 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="rgba(216,35,42,.5)" stroke-width="2" transform="rotate(80 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" transform="rotate(140 300 300)"/>
+      </svg>
+      <img src="assets/logo.png" alt="" style="position:absolute;inset:0;margin:auto;width:40%;height:40%;object-fit:contain;animation:floaty 7s ease-in-out infinite">
+    </div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;z-index:2">
+      <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:16px">// ÜBER UNS</div>
+      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(46px,7.5vw,104px);line-height:.92;letter-spacing:-1px;max-width:14ch">DIE THEORIE<br>HINTER <span style="color:#D8232A">DEM KNALL.</span></h1>
+      <p style="color:rgba(255,255,255,.72);font-size:clamp(16px,1.6vw,19px);line-height:1.6;max-width:52ch;margin-top:24px">Ein junger Verein mit großen Zielen — und einer Gemeinschaft, die zusammenhält. Das ist Beach Bang Theory Paderborn.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section style="padding:clamp(60px,7vw,100px) 28px">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(30px,5vw,70px);align-items:start">
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:14px">// UNSERE GESCHICHTE</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:clamp(34px,4.5vw,58px);line-height:.98;letter-spacing:-.5px">VON NULL AUF<br>FÜNF TEAMS.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <p style="font-size:17px;line-height:1.7;color:#3a342f">2021 mit einer Handvoll Volleyballbegeisterter gestartet, ist Beach Bang Theory in kurzer Zeit kräftig gewachsen. Aus einer Idee wurde ein eingetragener Verein — und aus ein paar Trainingsabenden wurden fünf Mannschaften vom Hobby- bis in den Leistungsbereich.</p>
+        <p style="font-size:17px;line-height:1.7;color:#3a342f">Was uns ausmacht? Wir nehmen Volleyball ernst, ohne uns dabei selbst zu ernst zu nehmen. Bei uns zählt Ehrgeiz genauso wie das Lachen nach dem Training. Genau diese Mischung macht uns zu einem Verein, in dem man bleibt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAME STORY -->
+  <section style="padding:0 28px clamp(60px,7vw,100px)">
+    <div style="max-width:1100px;margin:0 auto;background:#15110F;color:#fff;border-radius:26px;padding:clamp(36px,5vw,64px);position:relative;overflow:hidden">
+      <div style="position:absolute;top:-90px;left:-90px;width:340px;height:340px;opacity:.14;pointer-events:none">
+        <svg viewBox="0 0 600 600" style="width:100%;height:100%;animation:spinr 80s linear infinite">
+          <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(20 300 300)"/>
+          <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(80 300 300)"/>
+          <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(140 300 300)"/>
+        </svg>
+      </div>
+      <div style="position:relative;max-width:62ch">
+        <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:16px">// WARUM "BEACH BANG THEORY"?</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.8vw,46px);line-height:1.02;margin-bottom:22px">EIN NAME WIE EIN AUFSCHLAG.</h2>
+        <p style="font-size:17px;line-height:1.7;color:rgba(255,255,255,.78)">Der Name ist ein augenzwinkerndes Spiel mit dem „Big Bang" — dem großen Knall, mit dem alles begann. Bei uns ist es der Knall des Balls auf dem Boden des Gegners. Das Atom im Logo steht für unsere drei Volleyball-Welten in Bewegung: Halle, Beach und Gemeinschaft, die sich gegenseitig in Schwung halten.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section style="background:#fff;padding:clamp(60px,7vw,100px) 28px;border-top:1px solid rgba(21,17,15,.06);border-bottom:1px solid rgba(21,17,15,.06)">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:14px">// UNSERE FORMEL</div>
+      <h2 style="font-family:'Anton',sans-serif;font-size:clamp(32px,4.5vw,56px);line-height:.98;letter-spacing:-.5px;margin-bottom:42px">WOFÜR WIR STEHEN.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
+          <div style="border:1px solid rgba(21,17,15,.1);border-radius:18px;padding:28px;background:#F5F1EA">
+            <div style="font-family:'Space Mono',monospace;font-size:12px;color:#D8232A;margin-bottom:16px">{{ v.sym }}</div>
+            <div style="font-family:'Anton',sans-serif;font-size:24px;margin-bottom:10px;color:#15110F">{{ v.title }}</div>
+            <div style="font-size:15px;color:#5a534d;line-height:1.6">{{ v.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="padding:clamp(60px,7vw,100px) 28px">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:14px">// CHRONIK</div>
+      <h2 style="font-family:'Anton',sans-serif;font-size:clamp(32px,4.5vw,56px);line-height:.98;letter-spacing:-.5px;margin-bottom:42px">DER WEG BIS HEUTE.</h2>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <sc-for list="{{ timeline }}" as="m" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:120px 1fr;gap:24px;padding:22px 0;border-top:1px solid rgba(21,17,15,.12)">
+            <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3vw,40px);color:#D8232A;line-height:1">{{ m.year }}</div>
+            <div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:19px;margin-bottom:6px;color:#15110F">{{ m.title }}</div>
+              <div style="font-size:15px;color:#5a534d;line-height:1.6;max-width:60ch">{{ m.text }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- VORSTAND -->
+  <section style="background:#fff;padding:clamp(60px,7vw,100px) 28px;border-top:1px solid rgba(21,17,15,.06)">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:14px">// ANSPRECHPARTNER</div>
+      <h2 style="font-family:'Anton',sans-serif;font-size:clamp(32px,4.5vw,56px);line-height:.98;letter-spacing:-.5px;margin-bottom:42px">WER DEN BALL FLACH HÄLT.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+        <sc-for list="{{ people }}" as="p" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;gap:20px;border:1px solid rgba(21,17,15,.1);border-radius:18px;padding:24px;background:#F5F1EA">
+            <div style="width:72px;height:72px;border-radius:50%;background:#D8232A;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;color:#fff;font-size:26px;flex-shrink:0">{{ p.initials }}</div>
+            <div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:19px;color:#15110F">{{ p.name }}</div>
+              <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;color:#79706A;margin-top:4px">{{ p.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:#D8232A;color:#fff;padding:clamp(60px,7vw,100px) 28px;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-100px;bottom:-160px;width:460px;height:460px;opacity:.2;pointer-events:none">
+      <svg viewBox="0 0 600 600" style="width:100%;height:100%;animation:spin 70s linear infinite">
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(40 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(100 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(160 300 300)"/>
+      </svg>
+    </div>
+    <div style="position:relative;max-width:900px;margin:0 auto;text-align:center">
+      <h2 style="font-family:'Anton',sans-serif;font-size:clamp(36px,6vw,80px);line-height:.96;letter-spacing:-1px;margin-bottom:22px">SCHREIB GESCHICHTE MIT.</h2>
+      <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(255,255,255,.9);max-width:48ch;margin:0 auto 32px">Werde Teil eines Vereins, der gerade erst durchstartet.</p>
+      <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#D8232A;background:#fff;padding:18px 38px;border-radius:999px;display:inline-block;box-shadow:0 14px 36px rgba(0,0,0,.25)">MITGLIED WERDEN →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#15110F;color:rgba(255,255,255,.6);padding:60px 28px 40px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <img src="assets/logo-white.png" alt="BBT" style="height:40px">
+          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:17px">BEACH BANG THEORY</span>
+        </div>
+        <p style="font-size:14px;line-height:1.6;max-width:34ch">Volleyballverein aus Paderborn. Gegründet 2021. Ambitioniert, jung, am Ball.</p>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">MENÜ</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <a href="Startseite.dc.html">Startseite</a>
+          <a href="Mannschaften.dc.html">Mannschaften</a>
+          <a href="Turniere.dc.html">Turniere</a>
+          <a href="Ueber-uns.dc.html">Über uns</a>
+          <a href="Galerie.dc.html">Galerie</a>
+          <a href="Registrierung.dc.html">Mitglied werden</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">KONTAKT</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <span>Thomas Fast</span>
+          <span>Nathalie Borchert</span>
+          <span style="color:rgba(255,255,255,.4)">Paderborn, Deutschland</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.4)">
+      <span>© 2026 BEACH BANG THEORY PADERBORN E.V.</span>
+      <span>// JEDER PUNKT EINE REAKTION</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      values: [
+        { sym: '01 //', title: 'EHRGEIZ', text: 'Wir setzen uns Ziele und arbeiten gemeinsam hart daran, sie zu erreichen.' },
+        { sym: '02 //', title: 'GEMEINSCHAFT', text: 'Fünf Teams, ein Verein. Hier kennt man sich — auf und neben dem Feld.' },
+        { sym: '03 //', title: 'OFFENHEIT', text: 'Vom ersten Pritschen bis zur Liga: Bei uns ist jede:r willkommen.' },
+        { sym: '04 //', title: 'ENERGIE', text: 'Training, das Spaß macht, und Spiele, die unter die Haut gehen.' },
+      ],
+      timeline: [
+        { year: '2021', title: 'Der Urknall', text: 'Eine Gruppe Volleyballbegeisterter gründet Beach Bang Theory in Paderborn.' },
+        { year: '2022', title: 'Verein wird eingetragen', text: 'Aus der Idee wird offiziell ein e.V. — mit Satzung, Vorstand und ersten festen Trainingszeiten.' },
+        { year: '2023', title: 'Wir wachsen', text: 'Neue Mitglieder, neue Teams: Der Hobby- und Leistungsbereich nimmt Form an.' },
+        { year: 'Heute', title: 'Fünf Mannschaften', text: 'Herren 1 & 2, Damen, Hobby Leistung und Hobby — ein Verein für jedes Niveau.' },
+      ],
+      people: [
+        { initials: 'TF', name: 'Thomas Fast', role: 'ANSPRECHPARTNER' },
+        { initials: 'NB', name: 'Nathalie Borchert', role: 'ANSPRECHPARTNERIN' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
