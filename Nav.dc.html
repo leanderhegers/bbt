@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @keyframes navFade{from{opacity:0}to{opacity:1}}
+  @keyframes navSlide{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  @keyframes navDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+<div style="font-family:'Hanken Grotesk',sans-serif">
+
+  <!-- BAR -->
+  <header style="background:{{ navBg }};backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
+    <nav style="max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="Startseite.dc.html" style="display:flex;align-items:center;gap:13px;flex-shrink:0">
+        <img src="assets/logo-white.png" alt="BBT" style="height:42px;width:auto;display:block">
+        <span style="display:flex;flex-direction:column;line-height:1;white-space:nowrap">
+          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:clamp(15px,4.4vw,18px);letter-spacing:.5px">BEACH BANG THEORY</span>
+          <span style="font-family:'Space Mono',monospace;color:#D8232A;font-size:10.5px;letter-spacing:3px;margin-top:3px">PADERBORN E.V.</span>
+        </span>
+      </a>
+
+      <!-- desktop links -->
+      <div style="display:{{ deskDisplay }};align-items:center;gap:30px">
+        <div style="display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:600">
+          <!-- Mannschaften + dropdown -->
+          <div style="position:relative" onMouseEnter="{{ dropEnter }}" onMouseLeave="{{ dropLeave }}">
+            <a href="Mannschaften.dc.html" data-base="{{ cMann }}" style="display:flex;align-items:center;gap:6px;padding:6px 0;color:{{ cMann }}" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">
+              <span>Mannschaften</span>
+              <span style="font-size:8px;opacity:.7;transform:translateY(1px)">▼</span>
+            </a>
+            <sc-if value="{{ dropOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:16px;z-index:60">
+                <div style="background:#1d1713;border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:0 26px 64px rgba(0,0,0,.55);padding:10px;min-width:244px;animation:navDrop .2s ease">
+                  <a href="Mannschaften.dc.html" style="display:block;padding:9px 14px;border-radius:10px;color:rgba(255,255,255,.55);font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;background:transparent" onMouseOver="{{ ddOn }}" onMouseOut="{{ ddOff }}">ALLE MANNSCHAFTEN — ÜBERSICHT</a>
+                  <div style="height:1px;background:rgba(255,255,255,.08);margin:6px 10px"></div>
+                  <sc-for list="{{ teams }}" as="t" hint-placeholder-count="5">
+                    <a href="{{ t.href }}" style="display:flex;align-items:center;justify-content:space-between;gap:18px;padding:11px 14px;border-radius:10px;color:#fff;font-size:15px;font-weight:600;background:transparent" onMouseOver="{{ ddOn }}" onMouseOut="{{ ddOff }}">
+                      <span>{{ t.label }}</span>
+                      <span style="font-family:'Space Mono',monospace;font-size:11px;color:#D8232A">{{ t.tag }}</span>
+                    </a>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <a href="Turniere.dc.html" data-base="{{ cTurn }}" style="padding:6px 0;white-space:nowrap;color:{{ cTurn }}" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">Turniere</a>
+          <a href="Ueber-uns.dc.html" data-base="{{ cUeber }}" style="padding:6px 0;white-space:nowrap;color:{{ cUeber }}" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">Über uns</a>
+          <a href="Galerie.dc.html" data-base="{{ cGal }}" style="padding:6px 0;white-space:nowrap;color:{{ cGal }}" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">Galerie</a>
+        </div>
+        <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:12px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(216,35,42,.4)">MITGLIED WERDEN →</a>
+      </div>
+
+      <!-- hamburger -->
+      <button onClick="{{ toggle }}" aria-label="Menü öffnen" style="display:{{ burgerDisplay }};flex-direction:column;justify-content:center;align-items:center;gap:5px;width:48px;height:48px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:13px;cursor:pointer;padding:0;flex-shrink:0">
+        <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+        <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+        <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- SIDEBAR -->
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:200;animation:navFade .2s ease">
+      <div onClick="{{ close }}" style="position:absolute;inset:0;background:rgba(10,8,7,.62);backdrop-filter:blur(5px)"></div>
+      <aside style="position:absolute;top:0;right:0;height:100%;width:min(86vw,370px);background:#15110F;border-left:1px solid rgba(255,255,255,.1);box-shadow:-24px 0 70px rgba(0,0,0,.55);display:flex;flex-direction:column;padding:22px 26px 30px;overflow-y:auto;animation:navSlide .3s cubic-bezier(.22,1,.36,1) both">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px">
+          <div style="display:flex;flex-direction:column;line-height:1">
+            <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px;letter-spacing:.5px">BEACH BANG THEORY</span>
+            <span style="font-family:'Space Mono',monospace;color:#D8232A;font-size:10px;letter-spacing:3px;margin-top:4px">PADERBORN E.V.</span>
+          </div>
+          <button onClick="{{ close }}" aria-label="Menü schließen" style="width:42px;height:42px;flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center">×</button>
+        </div>
+
+        <nav style="display:flex;flex-direction:column">
+          <a href="Startseite.dc.html" onClick="{{ close }}" style="font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.3px;color:{{ cStart }};padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)">Startseite</a>
+
+          <a href="Mannschaften.dc.html" onClick="{{ close }}" style="font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.3px;color:{{ cMann }};padding:11px 0;display:flex;align-items:center;justify-content:space-between">
+            <span>Mannschaften</span>
+            <span style="font-family:'Space Mono',monospace;font-size:11px;color:#D8232A">ÜBERSICHT</span>
+          </a>
+          <div style="border-left:2px solid rgba(216,35,42,.5);margin:2px 0 10px 4px;padding-left:16px;display:flex;flex-direction:column">
+            <sc-for list="{{ teams }}" as="t" hint-placeholder-count="5">
+              <a href="{{ t.href }}" onClick="{{ close }}" style="display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:16px;font-weight:600;color:rgba(255,255,255,.72);padding:9px 0">
+                <span>{{ t.label }}</span>
+                <span style="font-family:'Space Mono',monospace;font-size:10.5px;color:rgba(216,35,42,.8)">{{ t.tag }}</span>
+              </a>
+            </sc-for>
+          </div>
+
+          <a href="Turniere.dc.html" onClick="{{ close }}" style="font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.3px;color:{{ cTurn }};padding:11px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)">Turniere</a>
+          <a href="Ueber-uns.dc.html" onClick="{{ close }}" style="font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.3px;color:{{ cUeber }};padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)">Über uns</a>
+          <a href="Galerie.dc.html" onClick="{{ close }}" style="font-family:'Anton',sans-serif;font-size:27px;letter-spacing:.3px;color:{{ cGal }};padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)">Galerie</a>
+        </nav>
+
+        <a href="Registrierung.dc.html" onClick="{{ close }}" style="margin-top:26px;font-family:'Space Mono',monospace;font-weight:700;font-size:14px;letter-spacing:1px;color:#fff;background:#D8232A;padding:17px;border-radius:999px;text-align:center;box-shadow:0 10px 30px rgba(216,35,42,.4)">MITGLIED WERDEN →</a>
+
+        <div style="margin-top:auto;padding-top:26px;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:rgba(255,255,255,.38)">// JEDER PUNKT EINE REAKTION</div>
+      </aside>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:480},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Startseite&quot;,&quot;Mannschaften&quot;,&quot;Turniere&quot;,&quot;Über uns&quot;,&quot;Galerie&quot;,&quot;Registrierung&quot;],&quot;default&quot;:&quot;Startseite&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;navBg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;rgba(21,17,15,.92)&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, isMobile: (typeof window !== 'undefined' && window.innerWidth < 900), dropOpen: false };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 900;
+      if (m !== this.state.isMobile) {
+        if (!m && this.state.open) { document.body.style.overflow = ''; }
+        this.setState({ isMobile: m, open: m ? this.state.open : false });
+      }
+    };
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (typeof document !== 'undefined') document.body.style.overflow = '';
+  }
+
+  renderVals() {
+    const active = this.props.active || '';
+    const base = 'rgba(255,255,255,.82)';
+    const RED = '#D8232A';
+    const col = (label) => (label === active ? RED : base);
+
+    const teams = [
+      { label: 'Herren 1', href: 'Team-Herren-1.dc.html', tag: 'H1' },
+      { label: 'Herren 2', href: 'Team-Herren-2.dc.html', tag: 'H2' },
+      { label: 'Damen', href: 'Team-Damen.dc.html', tag: 'D1' },
+      { label: 'Hobby Leistung', href: 'Team-Hobby-Leistung.dc.html', tag: 'HL' },
+      { label: 'Hobby', href: 'Team-Hobby.dc.html', tag: 'HB' },
+    ];
+
+    const setOpen = (o) => {
+      this.setState({ open: o });
+      if (typeof document !== 'undefined') document.body.style.overflow = o ? 'hidden' : '';
+    };
+
+    return {
+      navBg: this.props.navBg || 'rgba(21,17,15,.92)',
+      deskDisplay: this.state.isMobile ? 'none' : 'flex',
+      burgerDisplay: this.state.isMobile ? 'flex' : 'none',
+      open: this.state.open,
+      dropOpen: this.state.dropOpen && !this.state.isMobile,
+      teams,
+
+      cMann: this.props.active === 'Mannschaften' ? RED : base,
+      cTurn: col('Turniere'),
+      cUeber: col('Über uns'),
+      cGal: col('Galerie'),
+      cStart: col('Startseite'),
+
+      toggle: () => setOpen(!this.state.open),
+      close: () => setOpen(false),
+      dropEnter: () => this.setState({ dropOpen: true }),
+      dropLeave: () => this.setState({ dropOpen: false }),
+
+      hovOn: (e) => { e.currentTarget.style.color = '#D8232A'; },
+      hovOff: (e) => { e.currentTarget.style.color = e.currentTarget.dataset.base || base; },
+      ddOn: (e) => { e.currentTarget.style.background = 'rgba(216,35,42,.16)'; },
+      ddOff: (e) => { e.currentTarget.style.background = 'transparent'; },
+    };
+  }
+}
+</script>
+</body>
+</html>

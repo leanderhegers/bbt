@@ -25,26 +25,7 @@
 <div style="background:#15110F;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
 
   <!-- NAV -->
-  <header style="position:sticky;top:0;z-index:50;background:rgba(21,17,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
-    <nav style="max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="Startseite.dc.html" style="display:flex;align-items:center;gap:13px">
-        <img src="assets/logo-white.png" alt="BBT" style="height:42px;width:auto;display:block">
-        <span style="display:flex;flex-direction:column;line-height:1;white-space:nowrap">
-          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px;letter-spacing:.5px">BEACH BANG THEORY</span>
-          <span style="font-family:'Space Mono',monospace;color:#D8232A;font-size:10.5px;letter-spacing:3px;margin-top:3px">PADERBORN E.V.</span>
-        </span>
-      </a>
-      <div style="display:flex;align-items:center;gap:30px">
-        <div style="display:flex;align-items:center;gap:22px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.82)">
-          <a href="Mannschaften.dc.html" style="padding:6px 0" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">Mannschaften</a>
-          <a href="Turniere.dc.html" style="padding:6px 0" onMouseOver="{{ hovOn }}" onMouseOut="{{ hovOff }}">Turniere</a>
-          <a href="Ueber-uns.dc.html" style="padding:6px 0">Über uns</a>
-          <a href="Galerie.dc.html" style="padding:6px 0">Galerie</a>
-        </div>
-        <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:12px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(216,35,42,.4)">MITGLIED WERDEN →</a>
-      </div>
-    </nav>
-  </header>
+  <dc-import name="Nav" active="Startseite" nav-bg="rgba(21,17,15,.82)" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
 
   <!-- HERO -->
   <section style="position:relative;background:radial-gradient(120% 90% at 75% 10%,#2a1715 0%,#15110F 55%);padding:clamp(70px,9vw,130px) 28px clamp(80px,8vw,120px);overflow:hidden">

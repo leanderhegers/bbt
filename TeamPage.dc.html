@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Hanken Grotesk',sans-serif;background:#F5F1EA;color:#15110F;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+<div style="background:#F5F1EA;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
+
+  <!-- NAV -->
+  <dc-import name="Nav" active="Mannschaften" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
+
+  <!-- HERO -->
+  <section style="background:#15110F;color:#fff;padding:clamp(50px,6vw,86px) 28px clamp(44px,5vw,72px);position:relative;overflow:hidden">
+    <div style="position:absolute;top:-120px;right:-90px;width:360px;height:360px;opacity:.14;pointer-events:none">
+      <svg viewBox="0 0 600 600" style="width:100%;height:100%;animation:spin 70s linear infinite">
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(20 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(80 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(140 300 300)"/>
+      </svg>
+    </div>
+    <div style="position:relative;max-width:1100px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(255,255,255,.55);margin-bottom:20px">
+        <a href="Mannschaften.dc.html" style="color:rgba(255,255,255,.55)" onMouseOver="{{ hovWhite }}" onMouseOut="{{ hovDim }}">MANNSCHAFTEN</a>
+        <span style="color:#D8232A">/</span>
+        <span style="color:#fff">{{ short }}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <span style="width:30px;height:30px;border-radius:8px;background:{{ bg }};flex-shrink:0"></span>
+        <span style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:2px;color:#D8232A">{{ tag }}</span>
+      </div>
+      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(46px,8vw,104px);line-height:.92;letter-spacing:-1px">{{ name }}</h1>
+      <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:1px;margin-top:16px;color:rgba(255,255,255,.7)">{{ level }}</div>
+    </div>
+  </section>
+
+  <!-- STECKBRIEF: photo + info -->
+  <section style="padding:clamp(44px,5vw,80px) 28px">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,3vw,44px);align-items:start">
+      <!-- photo -->
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#79706A;margin-bottom:14px">// TEAMFOTO</div>
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ photoId }}" placeholder="{{ photoPlaceholder }}" shape="rounded" radius="22" style="display:block;width:100%;aspect-ratio:4/3;border:1px solid rgba(21,17,15,.12)" hint-size="100%,330px"></x-import>
+      </div>
+      <!-- info -->
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#79706A;margin-bottom:12px">// ÜBER DAS TEAM</div>
+          <p style="font-size:clamp(16px,1.5vw,18px);line-height:1.7;color:#3a342f;max-width:56ch">{{ desc }}</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.5px;color:#15110F;background:#fff;border:1px solid rgba(21,17,15,.1);padding:8px 14px;border-radius:999px">{{ c }}</span>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(21,17,15,.1);border:1px solid rgba(21,17,15,.1);border-radius:16px;overflow:hidden">
+          <div style="background:#fff;padding:20px 22px">
+            <div style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A;margin-bottom:8px">LIGA / SPIELKLASSE</div>
+            <div style="font-size:15px;font-weight:700;color:#15110F">{{ league }}</div>
+          </div>
+          <div style="background:#fff;padding:20px 22px">
+            <div style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A;margin-bottom:8px">TRAINING</div>
+            <div style="font-size:15px;font-weight:700;color:#15110F">{{ training }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED -->
+  <section style="background:#15110F;color:#fff;padding:clamp(50px,6vw,86px) 28px">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:34px">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:#D8232A;margin-bottom:12px">// AKTUELLES AUF INSTAGRAM</div>
+          <h2 style="font-family:'Anton',sans-serif;font-size:clamp(30px,4.5vw,56px);line-height:1">{{ instaLabel }}</h2>
+          <sc-if value="{{ instaIsClub }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.5);margin-top:10px">Dieses Team teilt den Vereins-Account.</div>
+          </sc-if>
+        </div>
+        <a href="{{ instaUrl }}" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:14px 24px;border-radius:999px;box-shadow:0 8px 24px rgba(216,35,42,.4);white-space:nowrap">AUF INSTAGRAM FOLGEN →</a>
+      </div>
+      <div style="background:#fff;border-radius:22px;padding:14px;max-width:560px;margin:0 auto">
+        <iframe src="{{ instaEmbedUrl }}" title="{{ instaLabel }} auf Instagram" scrolling="no" frameborder="0" allowtransparency="true" style="width:100%;height:680px;border:0;border-radius:12px;display:block;background:#fff"></iframe>
+      </div>
+      <div style="text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.4);margin-top:18px;max-width:60ch;margin-left:auto;margin-right:auto">Der Feed lädt live von Instagram. Wird er nicht angezeigt, einfach über den Button oben das Profil öffnen.</div>
+    </div>
+  </section>
+
+  <!-- KONTAKTAUFNAHME -->
+  <section style="padding:clamp(50px,6vw,86px) 28px">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">// KONTAKTAUFNAHME</div>
+      <div style="background:#fff;border:1px solid rgba(21,17,15,.08);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <div style="background:{{ bg }};color:#fff;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:230px;position:relative;overflow:hidden">
+          <div style="position:absolute;right:-50px;bottom:-50px;width:200px;height:200px;opacity:.16;pointer-events:none">
+            <img src="assets/logo-white.png" alt="" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;opacity:.85;position:relative">ANSPRECHPARTNER:IN</div>
+          <div style="position:relative">
+            <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.4vw,42px);line-height:1.02">{{ contactName }}</div>
+            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;margin-top:10px;opacity:.9">{{ name }}</div>
+          </div>
+        </div>
+        <div style="padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:22px">
+          <p style="font-size:16px;line-height:1.65;color:#3a342f;max-width:46ch">Du willst zum Probetraining oder hast Fragen zum Team? Melde dich direkt bei {{ contactName }}.</p>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A;width:74px;flex-shrink:0">E-MAIL</span>
+              <sc-if value="{{ hasEmail }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ emailHref }}" style="font-size:16px;font-weight:700;color:#D8232A;border-bottom:2px solid #D8232A;padding-bottom:2px">{{ emailText }}</a>
+              </sc-if>
+              <sc-if value="{{ noEmail }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size:15px;color:#9a938c;font-style:italic">{{ emailText }}</span>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A;width:74px;flex-shrink:0">TELEFON</span>
+              <sc-if value="{{ hasPhone }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ phoneHref }}" style="font-size:16px;font-weight:700;color:#D8232A;border-bottom:2px solid #D8232A;padding-bottom:2px">{{ phoneText }}</a>
+              </sc-if>
+              <sc-if value="{{ noPhone }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size:15px;color:#9a938c;font-style:italic">{{ phoneText }}</span>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A;width:74px;flex-shrink:0">INSTAGRAM</span>
+              <a href="{{ instaUrl }}" target="_blank" rel="noopener" style="font-size:16px;font-weight:700;color:#15110F;border-bottom:2px solid rgba(21,17,15,.25);padding-bottom:2px" onMouseOver="{{ hovRed }}" onMouseOut="{{ hovInk }}">{{ instaLabel }}</a>
+            </div>
+          </div>
+          <a href="Registrierung.dc.html" style="margin-top:auto;align-self:flex-start;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#15110F;padding:15px 26px;border-radius:999px">ZUM PROBETRAINING ANMELDEN →</a>
+        </div>
+      </div>
+      <a href="Mannschaften.dc.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:30px;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#79706A" onMouseOver="{{ hovRed }}" onMouseOut="{{ hovGrey }}">← ALLE MANNSCHAFTEN</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#15110F;color:rgba(255,255,255,.6);padding:60px 28px 40px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <img src="assets/logo-white.png" alt="BBT" style="height:40px">
+          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:17px">BEACH BANG THEORY</span>
+        </div>
+        <p style="font-size:14px;line-height:1.6;max-width:34ch">Volleyballverein aus Paderborn. Gegründet 2021. Ambitioniert, jung, am Ball.</p>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">MENÜ</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <a href="Startseite.dc.html">Startseite</a>
+          <a href="Mannschaften.dc.html">Mannschaften</a>
+          <a href="Turniere.dc.html">Turniere</a>
+          <a href="Ueber-uns.dc.html">Über uns</a>
+          <a href="Galerie.dc.html">Galerie</a>
+          <a href="Registrierung.dc.html">Mitglied werden</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">KONTAKT</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <span>Thomas Fast</span>
+          <span>Nathalie Borchert</span>
+          <span style="color:rgba(255,255,255,.4)">Paderborn, Deutschland</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.4)">
+      <span>© 2026 BEACH BANG THEORY PADERBORN E.V.</span>
+      <span>// JEDER PUNKT EINE REAKTION</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;teamId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;herren1&quot;,&quot;herren2&quot;,&quot;damen&quot;,&quot;hobbyleistung&quot;,&quot;hobby&quot;],&quot;default&quot;:&quot;herren1&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { team: null };
+
+  componentDidMount() {
+    import('./team-data.js')
+      .then((m) => {
+        const t = m.teamById(this.props.teamId) || m.TEAMS[0];
+        this.setState({ team: t });
+        if (t && typeof document !== 'undefined') document.title = 'BBT · ' + t.name;
+      })
+      .catch((e) => console.error('team-data load failed', e));
+  }
+
+  renderVals() {
+    const t = this.state.team;
+    const teamId = this.props.teamId || 'herren1';
+    const handle = t ? t.instagram : '';
+    const email = t ? t.contactEmail : '';
+    const phone = t ? t.contactPhone : '';
+
+    return {
+      name: t ? t.name : '',
+      short: t ? t.short : '',
+      tag: t ? t.tag : '',
+      level: t ? t.level : '',
+      league: t ? t.league : '',
+      desc: t ? t.desc : '',
+      training: t ? t.training : '',
+      bg: t ? t.bg : '#15110F',
+      chips: t ? t.chips : [],
+      contactName: t ? t.contactName : '',
+
+      photoId: 'teamphoto-' + teamId,
+      photoPlaceholder: t ? ('Teamfoto ' + t.short + ' hier ablegen') : 'Teamfoto hier ablegen',
+
+      instaLabel: handle ? '@' + handle : '',
+      instaUrl: handle ? 'https://www.instagram.com/' + handle + '/' : '#',
+      instaEmbedUrl: handle ? 'https://www.instagram.com/' + handle + '/embed' : 'about:blank',
+      instaIsClub: t ? !!t.instaIsClub : false,
+
+      hasEmail: !!email,
+      noEmail: !email,
+      emailText: email || 'Folgt nach Rücksprache',
+      emailHref: email ? 'mailto:' + email : null,
+      hasPhone: !!phone,
+      noPhone: !phone,
+      phoneText: phone || 'Folgt nach Rücksprache',
+      phoneHref: phone ? 'tel:' + String(phone).replace(/\s/g, '') : null,
+
+      hovWhite: (e) => { e.currentTarget.style.color = '#fff'; },
+      hovDim: (e) => { e.currentTarget.style.color = 'rgba(255,255,255,.55)'; },
+      hovRed: (e) => { e.currentTarget.style.color = '#D8232A'; },
+      hovInk: (e) => { e.currentTarget.style.color = '#15110F'; },
+      hovGrey: (e) => { e.currentTarget.style.color = '#79706A'; },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -23,26 +23,7 @@
 <div style="background:#F5F1EA;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
 
   <!-- NAV -->
-  <header style="position:sticky;top:0;z-index:50;background:rgba(21,17,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
-    <nav style="max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="Startseite.dc.html" style="display:flex;align-items:center;gap:13px">
-        <img src="assets/logo-white.png" alt="BBT" style="height:42px;width:auto;display:block">
-        <span style="display:flex;flex-direction:column;line-height:1;white-space:nowrap">
-          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:18px;letter-spacing:.5px">BEACH BANG THEORY</span>
-          <span style="font-family:'Space Mono',monospace;color:#D8232A;font-size:10.5px;letter-spacing:3px;margin-top:3px">PADERBORN E.V.</span>
-        </span>
-      </a>
-      <div style="display:flex;align-items:center;gap:30px">
-        <div style="display:flex;align-items:center;gap:22px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.82)">
-          <a href="Mannschaften.dc.html" style="padding:6px 0;color:#D8232A">Mannschaften</a>
-          <a href="Turniere.dc.html" style="padding:6px 0">Turniere</a>
-          <a href="Ueber-uns.dc.html" style="padding:6px 0">Über uns</a>
-          <a href="Galerie.dc.html" style="padding:6px 0">Galerie</a>
-        </div>
-        <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:12px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(216,35,42,.4)">MITGLIED WERDEN →</a>
-      </div>
-    </nav>
-  </header>
+  <dc-import name="Nav" active="Mannschaften" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
 
   <!-- PAGE HERO -->
   <section style="background:#15110F;color:#fff;padding:clamp(60px,7vw,100px) 28px clamp(50px,6vw,80px);position:relative;overflow:hidden">
@@ -93,7 +74,7 @@
                 <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A">ANSPRECHPARTNER</span>
                 <span style="font-size:14px;font-weight:600;color:#15110F">{{ t.contact }}</span>
               </div>
-              <a href="Registrierung.dc.html" style="margin-left:auto;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#D8232A;border-bottom:2px solid #D8232A;padding-bottom:3px">MITSPIELEN →</a>
+              <a href="{{ t.href }}" style="margin-left:auto;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#D8232A;border-bottom:2px solid #D8232A;padding-bottom:3px">KONTAKTAUFNAHME →</a>
             </div>
           </div>
         </div>
@@ -156,26 +137,19 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = { teams: [] };
+  componentDidMount() {
+    import('./team-data.js')
+      .then((m) => this.setState({
+        teams: m.TEAMS.map((t) => ({
+          tag: t.tag, name: t.name, level: t.level, bg: t.bg, desc: t.desc,
+          chips: t.chips, training: t.training, contact: t.contactName, href: t.slug,
+        })),
+      }))
+      .catch((e) => console.error('team-data load failed', e));
+  }
   renderVals() {
-    return {
-      teams: [
-        { tag: '[ TEAM H1 ]', name: 'HERREN 1', level: 'LEISTUNG · LIGA', bg: '#D8232A',
-          desc: 'Unser ambitioniertes Aushängeschild im Herrenbereich. Hier wird zielstrebig auf Punkte und Aufstieg hingearbeitet — mit intensivem Training und echtem Wettkampfgeist.',
-          chips: ['Wettkampf', 'Ligabetrieb', 'Athletik'], training: 'Termine folgen' },
-        { tag: '[ TEAM H2 ]', name: 'HERREN 2', level: 'AUFBAU · LIGA', bg: '#15110F',
-          desc: 'Die ideale Mannschaft, um sich spielerisch weiterzuentwickeln. Ehrgeizig, aber mit Raum zum Reinwachsen — perfekt für den Sprung Richtung Leistungsbereich.',
-          chips: ['Entwicklung', 'Ligabetrieb', 'Teamspirit'], training: 'Termine folgen' },
-        { tag: '[ TEAM D1 ]', name: 'DAMEN', level: 'LEISTUNG · LIGA', bg: '#D8232A',
-          desc: 'Starkes, eingespieltes Damenteam mit klaren Zielen. Technik, Taktik und Zusammenhalt stehen im Mittelpunkt — auf und neben dem Feld.',
-          chips: ['Wettkampf', 'Ligabetrieb', 'Technik'], training: 'Termine folgen' },
-        { tag: '[ TEAM HL ]', name: 'HOBBY LEISTUNG', level: 'AMBITIONIERT · TRAINING', bg: '#15110F',
-          desc: 'Für alle, die es ernst meinen, aber ohne festen Ligadruck spielen wollen. Anspruchsvolles Training, hohes Niveau und jede Menge Spaß am Spiel.',
-          chips: ['Anspruchsvoll', 'Mixed möglich', 'Regelmäßig'], training: 'Termine folgen' },
-        { tag: '[ TEAM HB ]', name: 'HOBBY', level: 'SPASS · MIXED', bg: '#B01419',
-          desc: 'Der lockere Einstieg in den Vereinssport. Bewegung, Gemeinschaft und Volleyball ohne Leistungsdruck — Neulinge sind hier ausdrücklich willkommen.',
-          chips: ['Einsteiger willkommen', 'Mixed', 'Locker'], training: 'Termine folgen' },
-      ],
-    };
+    return { teams: this.state.teams };
   }
 }
 </script>
