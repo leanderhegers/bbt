@@ -52,7 +52,7 @@ export const TEAMS = [
     contactName: 'Nathalie Borchert',
     contactEmail: '',
     contactPhone: '',
-    instagram: 'bbtchicks',
+    instagram: 'bbtchics',
     instaIsClub: false,
   },
   {
