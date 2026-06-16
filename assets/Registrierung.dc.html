@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Hanken Grotesk',sans-serif;background:#F5F1EA;color:#15110F;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  input,select{font-family:'Hanken Grotesk',sans-serif}
+  input::placeholder{color:#b3ada6}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+</style>
+</helmet>
+<div style="background:#F5F1EA;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
+
+  <!-- NAV -->
+  <dc-import name="Nav" active="Registrierung" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
+
+  <!-- HERO -->
+  <section style="background:#15110F;color:#fff;padding:clamp(56px,6vw,90px) 28px clamp(44px,5vw,70px);position:relative;overflow:hidden">
+    <div style="position:absolute;top:-90px;right:-70px;width:340px;height:340px;opacity:.16;pointer-events:none">
+      <svg viewBox="0 0 600 600" style="width:100%;height:100%;animation:spin 70s linear infinite">
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(20 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(80 300 300)"/>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#D8232A" stroke-width="3" transform="rotate(140 300 300)"/>
+      </svg>
+    </div>
+    <div style="position:relative;max-width:1100px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:14px">// MITGLIED WERDEN</div>
+      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(42px,7vw,92px);line-height:.92;letter-spacing:-1px">WERDE TEIL<br>DER <span style="color:#D8232A">REAKTION.</span></h1>
+      <p style="color:rgba(255,255,255,.72);font-size:clamp(15px,1.5vw,18px);line-height:1.6;max-width:58ch;margin-top:22px">Füll den Beitrittsantrag aus und wir melden uns mit allen Infos zu Training und Team. Die Angaben entsprechen unserem offiziellen Mitgliedsantrag.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section style="padding:clamp(40px,5vw,70px) 28px clamp(60px,7vw,100px)">
+    <div style="max-width:880px;margin:0 auto">
+
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:24px;padding:clamp(40px,6vw,72px);text-align:center;animation:pop .4s ease both">
+          <div style="width:84px;height:84px;border-radius:50%;background:#D8232A;display:flex;align-items:center;justify-content:center;margin:0 auto 26px;font-size:42px;color:#fff">✓</div>
+          <h2 style="font-family:'Anton',sans-serif;font-size:clamp(30px,4vw,48px);line-height:1;color:#15110F;margin-bottom:18px">DANKE, {{ submittedName }}!</h2>
+          <p style="font-size:17px;line-height:1.6;color:#5a534d;max-width:46ch;margin:0 auto 30px">Dein Beitrittsantrag ist bei uns eingegangen. Wir prüfen deine Angaben und melden uns in Kürze mit allen Details zu deinem Probetraining.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+            <a href="Mannschaften.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#D8232A;padding:14px 26px;border-radius:999px">MANNSCHAFTEN ANSEHEN →</a>
+            <a href="Startseite.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#15110F;border:1px solid rgba(21,17,15,.2);padding:14px 26px;border-radius:999px">ZUR STARTSEITE</a>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:14px">
+
+        <!-- 1 Persönliche Daten -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">01</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">PERSÖNLICHE DATEN</h3>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Vorname *</span><input name="vorname" required placeholder="Max" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Nachname *</span><input name="nachname" required placeholder="Mustermann" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Geburtsdatum *</span><input name="geburtsdatum" required type="date" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Geburtsort *</span><input name="geburtsort" required placeholder="Paderborn" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+          <div style="margin-top:16px;max-width:220px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Geschlecht *</span><select name="geschlecht" required style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"><option value="">Bitte wählen</option><option>männlich</option><option>weiblich</option><option>anders</option></select></label>
+          </div>
+        </div>
+
+        <!-- 2 Anschrift -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">02</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">ANSCHRIFT</h3>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Straße & Hausnr. *</span><input name="strasse" required placeholder="Beispielstraße 12" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">PLZ *</span><input name="plz" required placeholder="33098" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+          <div style="margin-top:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Ort *</span><input name="ort" required placeholder="Paderborn" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+        </div>
+
+        <!-- 3 Kontakt -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">03</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">KONTAKT</h3>
+          </div>
+          <p style="font-size:13.5px;color:#79706A;margin-bottom:22px;margin-top:-12px;padding-left:42px">Freiwillige Angaben laut Vereinsformular — für die Rückmeldung geben wir dir mindestens eine Kontaktmöglichkeit ans Herz.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">E-Mail *</span><input name="email" required type="email" placeholder="max@beispiel.de" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Telefon</span><input name="telefon" type="tel" placeholder="0151 23456789" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:13px;cursor:pointer;margin-top:18px"><input type="checkbox" name="kontakt_einwilligung" style="accent-color:#D8232A;width:19px;height:19px;margin-top:2px;flex-shrink:0"><span style="font-size:14px;line-height:1.5;color:#3a342f">Ich bin einverstanden, dass meine Kontaktdaten zu Vereinszwecken genutzt und an andere Mitglieder (z.B. für Fahrgemeinschaften) weitergegeben werden dürfen. (optional)</span></label>
+        </div>
+
+        <!-- 4 Mitgliedschaft -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">04</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">MITGLIEDSCHAFT</h3>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Wunsch-Mannschaft *</span><select name="mannschaft" required style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"><option value="">Bitte wählen</option><option>Herren 1</option><option>Herren 2</option><option>Damen</option><option>Hobby Leistung</option><option>Hobby</option><option>Noch unentschlossen</option></select></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Eintritt zum</span><input name="eintritt" type="date" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+          <div style="margin-top:20px;background:#F5F1EA;border:1px solid rgba(21,17,15,.1);border-radius:14px;padding:20px 22px">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#D8232A;margin-bottom:10px">// MITGLIEDSBEITRAG</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline">
+              <span style="font-family:'Anton',sans-serif;font-size:30px;color:#15110F;line-height:1">45 €<span style="font-size:16px;color:#79706A"> / Jahr</span></span>
+              <span style="font-size:14px;color:#5a534d;line-height:1.5;max-width:46ch">Bei Beitritt im laufenden Jahr zahlst du nur anteilig die verbleibenden Quartale.</span>
+            </div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:13px;cursor:pointer;margin-top:18px"><input type="checkbox" name="ligabetrieb" style="accent-color:#D8232A;width:19px;height:19px;margin-top:2px;flex-shrink:0"><span style="font-size:14.5px;line-height:1.5;color:#3a342f">Ich möchte am Ligabetrieb teilnehmen. <span style="color:#79706A">(Zusatzbeitrag ca. 50 € / Saison für Spielerpässe sowie WVV- &amp; DVV-Beiträge)</span></span></label>
+        </div>
+
+        <!-- 5 Bei Minderjährigen -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">05</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">BEI MINDERJÄHRIGEN</h3>
+          </div>
+          <p style="font-size:13.5px;color:#79706A;margin-bottom:22px;padding-left:42px">Nur ausfüllen, wenn das Mitglied unter 18 Jahre alt ist.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Erziehungsberechtigte:r</span><input name="erzieher" placeholder="Name" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Kontakt (Tel./E-Mail)</span><input name="erzieher_kontakt" placeholder="Telefon oder E-Mail" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+        </div>
+
+        <!-- 6 SEPA -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">06</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">SEPA-LASTSCHRIFTMANDAT</h3>
+          </div>
+          <p style="font-size:13.5px;color:#79706A;margin-bottom:22px;padding-left:42px">Der Mitgliedsbeitrag wird per Lastschrift eingezogen.</p>
+          <div style="display:grid;grid-template-columns:1fr;gap:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">Kontoinhaber:in</span><input name="kontoinhaber" placeholder="Vor- und Nachname" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px">
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">IBAN</span><input name="iban" placeholder="DE00 0000 0000 0000 0000 00" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none;font-family:'Space Mono',monospace" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+            <label style="display:flex;flex-direction:column;flex:1 1 min(100%,230px)"><span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#79706A;margin-bottom:7px;text-transform:uppercase">BIC</span><input name="bic" placeholder="XXXXXXXX" style="width:100%;padding:13px 15px;border:1px solid rgba(21,17,15,.18);border-radius:11px;font-size:15px;background:#fff;color:#15110F;outline:none;font-family:'Space Mono',monospace" style-focus="border-color:#D8232A;box-shadow:0 0 0 3px rgba(216,35,42,.12)"></label>
+          </div>
+        </div>
+
+        <!-- 7 Einwilligungen -->
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.1);border-radius:20px;padding:clamp(24px,3.5vw,38px)">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#D8232A;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">07</span>
+            <h3 style="font-family:'Anton',sans-serif;font-size:22px;color:#15110F">EINWILLIGUNGEN</h3>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <label style="display:flex;align-items:flex-start;gap:13px;cursor:pointer"><input type="checkbox" required style="accent-color:#D8232A;width:19px;height:19px;margin-top:2px;flex-shrink:0"><span style="font-size:14.5px;line-height:1.5;color:#3a342f">Ich erkenne die Satzung und die Beitragsordnung des Vereins an. *</span></label>
+            <label style="display:flex;align-items:flex-start;gap:13px;cursor:pointer"><input type="checkbox" required style="accent-color:#D8232A;width:19px;height:19px;margin-top:2px;flex-shrink:0"><span style="font-size:14.5px;line-height:1.5;color:#3a342f">Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu. *</span></label>
+            <label style="display:flex;align-items:flex-start;gap:13px;cursor:pointer"><input type="checkbox" style="accent-color:#D8232A;width:19px;height:19px;margin-top:2px;flex-shrink:0"><span style="font-size:14.5px;line-height:1.5;color:#3a342f">Ich willige ein, dass Fotos und Videos von mir bei Veranstaltungen angefertigt und auf der Instagram-Seite des Vereins (@beachbangtheorypaderborn) veröffentlicht werden dürfen. <span style="color:#79706A">(optional, jederzeit widerrufbar)</span></span></label>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:8px">
+          <button type="submit" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#fff;background:#D8232A;border:none;padding:18px 38px;border-radius:999px;cursor:pointer;box-shadow:0 12px 30px rgba(216,35,42,.4)">BEITRITTSANTRAG ABSENDEN →</button>
+          <span style="font-size:13px;color:#79706A;max-width:34ch">* Pflichtfelder. Deine Daten werden vertraulich behandelt.</span>
+        </div>
+      </form>
+      </sc-if>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#15110F;color:rgba(255,255,255,.6);padding:60px 28px 40px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <img src="assets/logo-white.png" alt="BBT" style="height:40px">
+          <span style="font-family:'Anton',sans-serif;color:#fff;font-size:17px">BEACH BANG THEORY</span>
+        </div>
+        <p style="font-size:14px;line-height:1.6;max-width:34ch">Volleyballverein aus Paderborn. Gegründet 2021. Ambitioniert, jung, am Ball.</p>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">MENÜ</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <a href="Startseite.dc.html">Startseite</a>
+          <a href="Mannschaften.dc.html">Mannschaften</a>
+          <a href="Turniere.dc.html">Turniere</a>
+          <a href="Ueber-uns.dc.html">Über uns</a>
+          <a href="Galerie.dc.html">Galerie</a>
+          <a href="Registrierung.dc.html">Mitglied werden</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#D8232A;margin-bottom:16px">KONTAKT</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <span>Thomas Fast</span>
+          <span>Nathalie Borchert</span>
+          <span style="color:rgba(255,255,255,.4)">Paderborn, Deutschland</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.4)">
+      <span>© 2026 BEACH BANG THEORY PADERBORN E.V.</span>
+      <span>// JEDER PUNKT EINE REAKTION</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { submitted: false, submittedName: '' };
+  renderVals() {
+    const onSubmit = (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.currentTarget);
+      const name = (fd.get('vorname') || '').toString().trim() || 'und willkommen';
+      this.setState({ submitted: true, submittedName: name });
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (err) {}
+    };
+    return {
+      onSubmit,
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      submittedName: this.state.submittedName,
+    };
+  }
+}
+</script>
+</body>
+</html>
