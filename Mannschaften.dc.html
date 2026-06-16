@@ -19,8 +19,9 @@
   @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
   @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 </style>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </helmet>
-<div style="background:#F5F1EA;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
+<div style="background:#F5F1EA;width:100%;overflow-x:clip;font-family:'Hanken Grotesk',sans-serif">
 
   <!-- NAV -->
   <dc-import name="Nav" active="Mannschaften" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
@@ -36,7 +37,7 @@
     </div>
     <div style="position:relative;max-width:1280px;margin:0 auto">
       <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:#D8232A;margin-bottom:16px">// UNSERE MANNSCHAFTEN</div>
-      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(48px,8vw,110px);line-height:.92;letter-spacing:-1px">FÜNF TEAMS,<br>EIN <span style="color:#D8232A">KOLLEKTIV.</span></h1>
+      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(48px,8vw,110px);line-height:.92;letter-spacing:-1px">5 TEAMS,<br>EIN <span style="color:#D8232A">KOLLEKTIV.</span></h1>
       <p style="color:rgba(255,255,255,.72);font-size:clamp(16px,1.6vw,19px);line-height:1.6;max-width:56ch;margin-top:24px">Ob ambitionierte Liga oder lockeres Hobby — bei Beach Bang Theory findet jede:r das passende Team. Such dir deine Mannschaft aus und komm zum Probetraining.</p>
     </div>
   </section>
@@ -45,7 +46,7 @@
   <section style="padding:clamp(50px,6vw,90px) 28px">
     <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:22px">
       <sc-for list="{{ teams }}" as="t" hint-placeholder-count="5">
-        <div style="background:#fff;border:1px solid rgba(21,17,15,.08);border-radius:22px;overflow:hidden;display:flex;flex-wrap:wrap">
+        <div style="background:#fff;border:1px solid rgba(21,17,15,.08);border-radius:22px;overflow:hidden;display:flex;flex-wrap:wrap;transition:transform .3s ease,box-shadow .3s ease" onMouseEnter="{{ cardEnter }}" onMouseLeave="{{ cardLeave }}">
           <!-- badge -->
           <div style="background:{{ t.bg }};color:#fff;padding:34px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:200px;flex:1 1 220px">
             <div style="position:absolute;right:-60px;bottom:-60px;width:230px;height:230px;opacity:.16;pointer-events:none">
@@ -94,7 +95,7 @@
     <div style="position:relative;max-width:900px;margin:0 auto;text-align:center">
       <h2 style="font-family:'Anton',sans-serif;font-size:clamp(36px,6vw,76px);line-height:.96;letter-spacing:-1px;margin-bottom:22px">NOCH UNSCHLÜSSIG?</h2>
       <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(255,255,255,.9);max-width:50ch;margin:0 auto 32px">Komm einfach zum Schnuppertraining. Wir finden gemeinsam das Team, das zu dir passt.</p>
-      <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#D8232A;background:#fff;padding:18px 38px;border-radius:999px;display:inline-block;box-shadow:0 14px 36px rgba(0,0,0,.25)">PROBETRAINING ANFRAGEN →</a>
+      <a href="Probetraining.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#D8232A;background:#fff;padding:18px 38px;border-radius:999px;display:inline-block;box-shadow:0 14px 36px rgba(0,0,0,.25)">PROBETRAINING ANFRAGEN →</a>
     </div>
   </section>
 
@@ -149,7 +150,17 @@ class Component extends DCLogic {
       .catch((e) => console.error('team-data load failed', e));
   }
   renderVals() {
-    return { teams: this.state.teams };
+    const cardEnter = (e) => {
+      const card = e.currentTarget;
+      card.style.transform = 'translateY(-5px)';
+      card.style.boxShadow = '0 18px 50px rgba(21,17,15,.13)';
+    };
+    const cardLeave = (e) => {
+      const card = e.currentTarget;
+      card.style.transform = 'translateY(0)';
+      card.style.boxShadow = 'none';
+    };
+    return { teams: this.state.teams, cardEnter, cardLeave };
   }
 }
 </script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Hanken Grotesk',sans-serif;background:#15110F;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  input::placeholder{color:rgba(21,17,15,.32)}
+  input:focus,select:focus{outline:none;border-color:#D8232A !important;box-shadow:0 0 0 3px rgba(216,35,42,.1)}
+</style>
+</helmet>
+
+<div style="background:#15110F;min-height:100vh;font-family:'Hanken Grotesk',sans-serif">
+
+  <dc-import name="Nav" active="Probetraining" nav-bg="rgba(21,17,15,.95)" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
+
+  <!-- HEADER -->
+  <section style="background:#D8232A;padding:clamp(50px,7vw,90px) 28px clamp(44px,6vw,76px);overflow:hidden;position:relative">
+    <div style="position:absolute;right:-60px;bottom:-80px;width:380px;height:380px;opacity:.12;pointer-events:none">
+      <svg viewBox="0 0 600 600" style="width:100%;height:100%">
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(30 300 300)"></ellipse>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(90 300 300)"></ellipse>
+        <ellipse cx="300" cy="300" rx="280" ry="120" fill="none" stroke="#fff" stroke-width="3" transform="rotate(150 300 300)"></ellipse>
+      </svg>
+    </div>
+    <div style="position:relative;max-width:1280px;margin:0 auto">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.75);margin-bottom:14px">// PROBETRAINING</div>
+      <h1 style="font-family:'Anton',sans-serif;font-size:clamp(44px,8vw,96px);line-height:.92;color:#fff;letter-spacing:-1px">KOMM VORBEI.<br>WIR MELDEN UNS.</h1>
+      <p style="font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.88);line-height:1.6;max-width:48ch;margin-top:18px">Hinterlass uns deine Kontaktdaten — wir melden uns schnell bei dir mit Infos zu Trainingszeiten und der passenden Mannschaft.</p>
+    </div>
+  </section>
+
+  <!-- FORM / SUCCESS -->
+  <section style="background:#F5F1EA;padding:clamp(50px,7vw,90px) 28px;min-height:50vh">
+    <div style="max-width:600px;margin:0 auto">
+
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ handleSubmit }}" style="background:#fff;border-radius:24px;padding:clamp(28px,5vw,50px);box-shadow:0 8px 40px rgba(21,17,15,.08)">
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2.5px;color:#D8232A;margin-bottom:28px">KONTAKTDATEN</div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px">
+            <label style="display:flex;flex-direction:column;gap:7px;flex:1 1 min(100%,180px)">
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A">VORNAME *</span>
+              <input type="text" required placeholder="Max" value="{{ vorname }}" onChange="{{ onVorname }}" style="border:1.5px solid rgba(21,17,15,.15);border-radius:12px;padding:13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:#15110F;width:100%">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;flex:1 1 min(100%,180px)">
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A">NACHNAME *</span>
+              <input type="text" required placeholder="Mustermann" value="{{ nachname }}" onChange="{{ onNachname }}" style="border:1.5px solid rgba(21,17,15,.15);border-radius:12px;padding:13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:#15110F;width:100%">
+            </label>
+          </div>
+
+          <label style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+            <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A">HANDYNUMMER ODER E-MAIL *</span>
+            <input type="text" required placeholder="+49 170 000 0000  oder  name@example.com" value="{{ kontakt }}" onChange="{{ onKontakt }}" style="border:1.5px solid rgba(21,17,15,.15);border-radius:12px;padding:13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:#15110F;width:100%">
+          </label>
+
+          <label style="display:flex;flex-direction:column;gap:7px;margin-bottom:28px">
+            <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:#79706A">INTERESSE</span>
+            <div style="position:relative">
+              <select value="{{ interesse }}" onChange="{{ onInteresse }}" style="width:100%;border:1.5px solid rgba(21,17,15,.15);border-radius:12px;padding:13px 44px 13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:#15110F;background:#fff;cursor:pointer;appearance:none;-webkit-appearance:none">
+                <option value="">Noch keine Ahnung — egal!</option>
+                <option value="Hallenvolleyball">Hallenvolleyball</option>
+                <option value="Beachvolleyball">Beachvolleyball</option>
+                <option value="Beides (Halle + Beach)">Beides (Halle + Beach)</option>
+              </select>
+              <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:#79706A;font-size:13px">▾</span>
+            </div>
+          </label>
+
+          <button type="submit" style="width:100%;font-family:'Space Mono',monospace;font-weight:700;font-size:14px;letter-spacing:1.5px;color:#fff;background:#D8232A;padding:17px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 10px 28px rgba(216,35,42,.32)">ANFRAGE ABSCHICKEN →</button>
+          <p style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(21,17,15,.35);text-align:center;margin-top:16px;line-height:1.55">Deine Daten werden ausschließlich zur Kontaktaufnahme genutzt.</p>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:clamp(50px,8vw,100px) 0;animation:rise .5s ease both">
+          <div style="width:72px;height:72px;background:#D8232A;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2 style="font-family:'Anton',sans-serif;font-size:clamp(36px,6vw,62px);color:#15110F;line-height:.95;margin-bottom:16px">SUPER!<br>WIR MELDEN UNS.</h2>
+          <p style="font-size:17px;color:#79706A;line-height:1.6;max-width:38ch;margin:0 auto 32px">Deine Anfrage ist bei uns angekommen. Wir melden uns so schnell wie möglich.</p>
+          <a href="Startseite.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;background:#15110F;padding:15px 28px;border-radius:999px;display:inline-block">ZURÜCK ZUR STARTSEITE</a>
+        </div>
+      </sc-if>
+
+    </div>
+  </section>
+
+  <footer style="background:#15110F;color:rgba(255,255,255,.3);padding:30px 28px;text-align:center;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1px">
+    © 2026 BEACH BANG THEORY PADERBORN E.V.
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sent: false, vorname: '', nachname: '', kontakt: '', interesse: '' };
+
+  renderVals() {
+    const s = this.state;
+    return {
+      sent:    s.sent,
+      notSent: !s.sent,
+      vorname:   s.vorname,
+      nachname:  s.nachname,
+      kontakt:   s.kontakt,
+      interesse: s.interesse,
+      onVorname:   (e) => this.setState({ vorname:   e.target.value }),
+      onNachname:  (e) => this.setState({ nachname:  e.target.value }),
+      onKontakt:   (e) => this.setState({ kontakt:   e.target.value }),
+      onInteresse: (e) => this.setState({ interesse: e.target.value }),
+      handleSubmit: (e) => {
+        e.preventDefault();
+        const { vorname, nachname, kontakt, interesse } = this.state;
+        // ← Bitte die E-Mail-Adresse des Ansprechpartners hier eintragen:
+        const to = 'KONTAKT_EMAIL@example.com';
+        const subject = encodeURIComponent(`Probetraining Anfrage – ${vorname} ${nachname}`);
+        const lines = [
+          'Probetraining Anfrage',
+          '',
+          `Name:     ${vorname} ${nachname}`,
+          `Kontakt:  ${kontakt}`,
+          interesse ? `Interesse: ${interesse}` : '',
+        ].filter(Boolean).join('\n');
+        window.open(`mailto:${to}?subject=${subject}&body=${encodeURIComponent(lines)}`, '_blank');
+        this.setState({ sent: true });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

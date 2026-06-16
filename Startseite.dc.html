@@ -21,8 +21,9 @@
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
   @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 </style>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </helmet>
-<div style="background:#15110F;width:100%;overflow:hidden;font-family:'Hanken Grotesk',sans-serif">
+<div style="background:#15110F;width:100%;overflow-x:clip;font-family:'Hanken Grotesk',sans-serif">
 
   <!-- NAV -->
   <dc-import name="Nav" active="Startseite" nav-bg="rgba(21,17,15,.82)" style="position:sticky;top:0;z-index:50;display:block" hint-size="100%,71px"></dc-import>
@@ -77,7 +78,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
         <sc-for list="{{ teams }}" as="t" hint-placeholder-count="5">
-          <a href="Mannschaften.dc.html" style="position:relative;background:#fff;border:1px solid rgba(21,17,15,.08);border-radius:18px;padding:26px;min-height:210px;display:flex;flex-direction:column;gap:18px;overflow:hidden;transition:transform .25s,box-shadow .25s" onMouseOver="{{ cardOn }}" onMouseOut="{{ cardOff }}">
+          <a href="{{ t.href }}" style="position:relative;background:#fff;border:1px solid rgba(21,17,15,.08);border-radius:18px;padding:26px;min-height:210px;display:flex;flex-direction:column;gap:18px;overflow:hidden;transition:transform .25s,box-shadow .25s" onMouseOver="{{ cardOn }}" onMouseOut="{{ cardOff }}">
             <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;color:#D8232A">{{ t.tag }}</div>
             <div style="margin-top:auto;padding-right:30px">
               <div style="font-family:'Anton',sans-serif;font-size:28px;line-height:1.04;color:#15110F;margin-bottom:8px">{{ t.name }}</div>
@@ -153,8 +154,8 @@
     <div style="position:relative;max-width:900px;margin:0 auto;text-align:center">
       <div style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:3px;color:rgba(255,255,255,.85);margin-bottom:18px">// WERDE TEIL DER REAKTION</div>
       <h2 style="font-family:'Anton',sans-serif;font-size:clamp(40px,7vw,92px);line-height:.95;letter-spacing:-1px;margin-bottom:24px">KOMM INS TEAM.</h2>
-      <p style="font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.9);max-width:50ch;margin:0 auto 36px">Probetraining gefällig? Schreibe und eine E-Mail und wir melden uns mit allen Infos zu Zeiten und passender Mannschaft.</p>
-      <a href="Registrierung.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#D8232A;background:#fff;padding:18px 38px;border-radius:999px;display:inline-block;box-shadow:0 14px 36px rgba(0,0,0,.25)">JETZT REGISTRIEREN →</a>
+      <p style="font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.9);max-width:50ch;margin:0 auto 36px">Probetraining gefällig? Hinterlass uns deine Kontaktdaten — wir melden uns schnell mit allen Infos zu Zeiten und passender Mannschaft.</p>
+      <a href="Probetraining.dc.html" style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:1px;color:#D8232A;background:#fff;padding:18px 38px;border-radius:999px;display:inline-block;box-shadow:0 14px 36px rgba(0,0,0,.25)">PROBETRAINING ANFRAGEN →</a>
     </div>
   </section>
 
@@ -211,11 +212,11 @@ class Component extends DCLogic {
         { num: '∞', label: 'AMBITION' },
       ],
       teams: [
-        { tag: '[ H1 ]', name: 'HERREN 1', level: 'Leistung · Liga' },
-        { tag: '[ H2 ]', name: 'HERREN 2', level: 'Aufbau · Liga' },
-        { tag: '[ D1 ]', name: 'DAMEN', level: 'Leistung · Liga' },
-        { tag: '[ HL ]', name: 'HOBBY LEISTUNG', level: 'Ambitioniert · Training' },
-        { tag: '[ HB ]', name: 'HOBBY', level: 'Spaß · Mixed' },
+        { tag: '[ H1 ]', name: 'HERREN 1', level: 'Leistung · Liga', href: 'Team-Herren-1.dc.html' },
+        { tag: '[ H2 ]', name: 'HERREN 2', level: 'Aufbau · Liga', href: 'Team-Herren-2.dc.html' },
+        { tag: '[ D1 ]', name: 'DAMEN', level: 'Leistung · Liga', href: 'Team-Damen.dc.html' },
+        { tag: '[ HL ]', name: 'HOBBY LEISTUNG', level: 'Ambitioniert · Training', href: 'Team-Hobby-Leistung.dc.html' },
+        { tag: '[ HB ]', name: 'HOBBY', level: 'Spaß · Mixed', href: 'Team-Hobby.dc.html' },
       ],
       values: [
         { sym: '01 //', title: 'EHRGEIZ', text: 'Wir wollen gewinnen — und arbeiten hart dafür.' },
